@@ -1,0 +1,114 @@
+{% extends 'users/userbase.html'%}
+{%load static%}
+
+ <script type="text/javascript" src="{%static 'assets/js/webcam.min.js'%}"></script>
+  <script language="JavaScript">
+        Webcam.set({
+            width: 320,
+            height: 240,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+        Webcam.attach('#my_camera');
+
+        // code to handle taking the snapshot and displaying it locally
+        function take_snapshot() {
+
+            // take snapshot and get image data
+            Webcam.snap(function (data_uri) {
+                var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
+
+                document.getElementById('mydata').value = raw_image_data;
+                document.getElementById('voting_session').value = 1;
+                document.getElementById('myform').submit();
+            });
+        }
+    </script>
+{%block contents%}
+<div class="container">
+		<div class="row">
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="thin text-center">
+Please Enter OTP and Stand up in front of cam
+                            </h3>
+                            <main role="main" class="container">
+    <div class="row mb-3">
+
+    </div>
+
+
+    <div hidden id="my_camera"></div>
+
+    <form id="myform" method="post" action="/ValidatePicandOTP/">
+        {%csrf_token%}
+        <input id="mydata" type="hidden" name="mydata" value=""/>
+
+        <table>
+            <tr>
+                <td> Please Enter Otp:</td><td><input id="voting_session" type="text" name="otp" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button class="btn btn-outline-info mx-auto" style="position: sticky; left: 100%; margin-bottom: 50px;"
+            onclick="take_snapshot()">
+        <span> Vote now </span>
+    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+
+    <div class="card-deck">
+
+            <div class="col-sm-6 col-md-6 item" style="margin-bottom: 50px;">
+
+            </div>
+
+    </div>
+
+    <script type="text/javascript" src="{%static 'assets/js/webcam.min.js'%}"></script>
+
+    <script language="JavaScript">
+        Webcam.set({
+            width: 320,
+            height: 240,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+        Webcam.attach('#my_camera');
+
+        // code to handle taking the snapshot and displaying it locally
+        function take_snapshot() {
+
+            // take snapshot and get image data
+            Webcam.snap(function (data_uri) {
+                var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
+
+                document.getElementById('mydata').value = raw_image_data;
+                //document.getElementById('voting_session').value = 'testsample';
+                document.getElementById('myform').submit();
+            });
+        }
+    </script>
+
+</main>
+							</p>
+							<hr>
+
+
+						</div>
+					</div>
+
+				</div>
+
+			</article>
+			<!-- /Article -->
+
+		</div>
+	</div>	<!-- /container -->
+
+{%endblock%}

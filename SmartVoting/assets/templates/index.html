@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{%block contents%}
+<div class="container">
+		<div class="row">
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="thin text-center">Register a new account</h3>
+							<p class="text-center text-muted">
+
+								 {% if messages %}
+                        {% for message in messages %}
+                        <font color='red'> {{ message }}</font>
+                        {% endfor %}
+                        {% endif %}
+								{{msg}}
+								<p>
+							Our country, India is the largest democratic
+country in the world. So it is essential to make sure that the
+governing body is elected through a fair election. India has
+only offline voting system which is not effective and upto the
+mark as it requires large man force and it also requires more
+time to process and publish the results. Therefore, to be made
+effective, the system needs a change, which overcomes these
+disadvantages. The new method does not force the person's
+physical appearance to vote, which makes the things easier.
+This paper focusses on a system where the user can vote
+remotely from anywhere using his/her computer or mobile
+phone and doesn’t require the voter to got to the polling
+station through two step authentication of face recognition
+and OTP system.
+</p>
+							</p>
+							<hr>
+
+
+						</div>
+					</div>
+
+				</div>
+
+			</article>
+			<!-- /Article -->
+
+		</div>
+	</div>	<!-- /container -->
+
+{%endblock%}

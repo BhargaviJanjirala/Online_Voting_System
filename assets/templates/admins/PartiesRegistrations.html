@@ -1,0 +1,136 @@
+{% extends 'admins/adminbase.html'%}
+{%load static%}
+{%block contents%}
+<!--<style>-->
+<!--    .bg-light{-->
+<!--    margin-top: -500px;-->
+<!--    background: #65cd00;-->
+<!--    padding:10px;-->
+<!--    }-->
+
+<!--</style>-->
+
+<section class="we-do">
+    <div class="container">
+        <div class="we-do-details">
+            <div class="section-header text-center">
+                <h2>Admin Parties Form</h2>
+                <p>
+                    <center>
+                <form action="{%url 'PartiesRegisterActions'%}" method="POST" enctype="multipart/form-data"
+                      style="width:100%">
+
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td>User Name</td>
+                            <td style="color:black">{{form.name}}</td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td>Mobile</td>
+                            <td style="color:black">{{form.mobile}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>email</td>
+                            <td style="color:black">{{form.email}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Constitution</td>
+                            <td style="color:black">{{form.locality}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Address</td>
+                            <td style="color:black">{{form.address}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Party Symnbol</td>
+                            <td style="color:black">{{form.partysymbol}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Party Name</td>
+                            <td style="color:black">{{form.partyname}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td style="color:black">{{form.status}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <button class="btn btn-block btn-primary text-white py-3 px-5"
+                                        style="margin-center:20%;"
+                                        type="submit">
+                                    Register
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group mt-3">
+                                    <span>&nbsp;</span>
+                                </div>
+                            </td>
+                        </tr>
+
+                        {% if messages %}
+                        {% for message in messages %}
+                        <font color='red'> {{ message }}</font>
+                        {% endfor %}
+                        {% endif %}
+
+                    </table>
+
+                </form>
+                <h2>View Registered EC Users</h2>
+                <p>
+                <table class="table table-bordered bg-light text-dark">
+                    <thead>
+                    <tr style="color:red;font-weight:bold;">
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Locality</th>
+                        <th>Status</th>
+                        <th>Symbol</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in data %}
+                    <tr style="color: Green">
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.name}}</td>
+                        <td>{{i.mobile}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.locality}}</td>
+                        <td>{{i.status}}</td>
+                        <td><img src="{{i.partysymbol.url}}" alt="" width="40" height="30"></td>
+                        <td><a class="btn-link" href="/DeleteParty/?uid={{ i.id }}" style="color:DARKBLUE">Delete</a>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+                </center>
+                </p>
+            </div><!--/.section-header-->
+
+        </div><!--/.we-do-details-->
+    </div><!--/.container-->
+</section><!--/.we-do-->
+
+
+{%endblock%}

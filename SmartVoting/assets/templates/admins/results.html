@@ -1,0 +1,123 @@
+{% extends 'admins/adminbase.html'%}
+{%load static%}
+{%block contents%}
+<!--<style>-->
+<!--    .bg-light{-->
+<!--    margin-top: -500px;-->
+<!--    background: #65cd00;-->
+<!--    padding:10px;-->
+<!--    }-->
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  margin-left:-5px;
+  margin-right:-5px;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+</style>
+<!--</style>-->
+
+<section class="we-do">
+    <div class="container">
+        <div class="we-do-details">
+            <div class="section-header text-center">
+                <h2>Admin View Results</h2>
+                <p>
+                <p>
+                <div class="row">
+  <div class="column">
+                    <table class="table table-bordered bg-light text-dark">
+
+                        {% for key,value in data.items %}
+                        <tr>
+                            <td>{{key}}</td>
+                            <td>{{value}} votes</td>
+                        </tr>
+
+                        {% endfor %}
+                    </table>
+  </div>
+                    <div class="column">
+                <table class="table table-bordered bg-light text-dark">
+                         {% for key,value in symb.items %}
+                        <tr>
+                            <td>{{key}}</td>
+                            <td><img src="{{value.url}}" alt="" width="40" height="30"></td>
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+                    </div>
+                    <h1>Chart Analysis</h1>
+                                        <div id="container" width="200" height="200"></div>
+                                        <script src="https://code.highcharts.com/highcharts.src.js"></script>
+                                        <script>
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'ONLINE VOTING SYSTEM using BLOCKCHAIN'
+        },
+        xAxis: {
+           categories: [
+            {% for entry in dataset %}'{{ entry.candidateName }} Candidate'{% if not forloop.last %}, {% endif %}{% endfor %}
+          ]
+        },
+        series: [{
+            name: 'Polled Votes',
+            data: [
+            {% for entry in dataset %}{{ entry.dcount }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'green'
+        },]
+    });
+
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                </div>
+                </div>
+
+                </h2>
+                </p>
+            </div><!--/.section-header-->
+
+        </div><!--/.we-do-details-->
+    </div><!--/.container-->
+</section><!--/.we-do-->
+
+
+{%endblock%}

@@ -1,0 +1,65 @@
+{%extends 'users/userbase.html'%}
+{% load static %}
+
+{%block contents%}
+<div class="container">
+		<div class="row">
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+                <h2>ONLINE VOTING SYSTEM using BLOCKCHAIN</h2>
+                <p>
+
+                </p>
+                {% if vote.status == 'active' %}
+                <form action="{%url 'VoterVoting'%}" method="post">
+                    {%csrf_token%}
+                    Aadhar Number : <input type="text" name="aadhar" readonly value="{{aadhar}}">
+
+                <table class="sm-table" border="2px">
+                    <thead>
+                    <tr style="color:red;font-weight:bold;">
+                        <th>S.No</th>
+                        <th>Candidates</th>
+                        <th>Constituency</th>
+                        <th>Symbol</th>
+                        <th>Vote</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in data %}
+                    <tr style="color: Green">
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.name}}</td>
+                        <td>{{i.locality}}</td>
+                        <td><img src="{{i.partysymbol.url}}" alt="" width="80" height="60"></td>
+                        <td>Vote
+<!--                            <input type="radio" name="vote" value="{{i.id}}" onchange="this.form.submit()">-->
+                             <input type="radio" name="vote" value="{{i.id}}" required>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+                   <input type="submit" name="submit" value="Vote Now" class="btn btn-success wow fadeInUp" />
+                </form>
+                    {%else%}
+                <h2>Their is No Elections</h2>
+                <h3><font color="RED">{{vote.status}}</font></h3>
+                {%endif%}
+            </div><!--/.section-header-->
+
+      </div>
+					</div>
+
+				</div>
+
+			</article>
+			<!-- /Article -->
+
+		</div>
+	</div>	<!-- /container --
+
+{%endblock%}

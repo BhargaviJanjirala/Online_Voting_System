@@ -1,0 +1,43 @@
+{% extends 'admins/adminbase.html'%}
+{%load static%}
+{%block contents%}
+<!--<style>-->
+<!--    .bg-light{-->
+<!--    margin-top: -500px;-->
+<!--    background: #65cd00;-->
+<!--    padding:10px;-->
+<!--    }-->
+
+<!--</style>-->
+
+ <section class="we-do">
+    <div class="container">
+        <div class="we-do-details">
+            <div class="section-header text-center">
+                <h2>Admin Election Turn on or Turn Off</h2>
+                <p>
+                   The Votting is : {{data.status}}<br>
+                   <span>{{data.cDate}}</span><br>
+
+                    {% if data.status == 'inactive' %}
+                                               <a href="{%url 'VoteTurnOn'%}"><button class="btn btn-block btn-primary text-white py-3 px-5"
+                                        style="margin-center:20%;"
+                                        type="submit">
+                                    Turn On
+                                </button></a>
+                    {%else%}
+                      <a href="{%url 'VoteTurnOff'%}"><button class="btn btn-block btn-primary text-white py-3 px-5"
+                                        style="margin-center:20%;"
+                                        type="submit">
+                                    Turn OFF
+                                </button></a>
+                    {%endif%}
+                </p>
+            </div><!--/.section-header-->
+
+        </div><!--/.we-do-details-->
+    </div><!--/.container-->
+</section><!--/.we-do-->
+
+
+{%endblock%}
